@@ -20,10 +20,10 @@ tailwing_w = 3;
 
 % Define the vertices (physical location of vertices)
 V = [fuse_l1 0 0; 
-    fuse_l2 fuse_w/2 fuse_h/2; 
-    fuse_l2 -fuse_w/2 fuse_h/2; 
-    fuse_l1 -fuse_w/2 -fuse_h/2;
-    fuse_l1 fuse_w/2 -fuse_h/2;
+    fuse_l2 fuse_w/2 -fuse_h/2; 
+    fuse_l2 -fuse_w/2 -fuse_h/2; 
+    fuse_l1 -fuse_w/2 fuse_h/2;
+    fuse_l1 fuse_w/2 fuse_h/2;
     -fuse_l3 0 0;
     0 wing_w/2 0;
     -wing_l wing_w/2 0;
@@ -34,7 +34,7 @@ V = [fuse_l1 0 0;
     -fuse_l3 -tailwing_w/2 0;
     -fuse_l3+tailwing_l -tailwing_w/2 0;
     -fuse_l3+tailwing_l 0 0;
-    -fuse_l3 0 tail_h]; % 16 vertices totally
+    -fuse_l3 0 -tail_h]; % 16 vertices totally
 % Define surfaces as a list of numbered vertices
 F = [1 1 2 3; 1 1 2 5; 1 1 5 4; 1 1 3 4; 2 2 3 6; 3 3 4 6; 5 5 4 6; 2 2 5 6; 7 8 9 10; 11 12 13 14; 15 15 6 16];
 
@@ -62,7 +62,7 @@ colors = [...
 % Transform vertices from NED to XYZ (for matlab rendering)
 R = [0, 1, 0;...
       1, 0, 0;...
-      0, 0, 1];
+      0, 0, -1];
 V1 = V*R;
 
 % Be familiar with the function patch
