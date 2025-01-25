@@ -47,7 +47,7 @@ function handle = drawSpacecraftBody(V,F,patchcolors,...
     R = [...
         0, 1, 0;...
         1, 0, 0;...
-        0, 0, 1;...
+        0, 0, -1;...
         ];
     V = V*R;
     
@@ -67,12 +67,12 @@ end
 
 function XYZ=rotate(XYZ,phi,theta,psi)
     % define rotation matrix
-    R_roll = [1 0 0;0 cos(-phi) sin(-phi);0 -sin(-phi) cos(-phi)];% to be complete by students
-    R_pitch = [cos(-theta) 0 -sin(-theta); 0 1 0; sin(-theta) 0 cos(-theta)];% to be complete by students
-    R_yaw = [cos(-psi) sin(-psi) 0; -sin(-psi) cos(-psi) 0;0 0 1];% to be complete by students
+    R_roll = [1 0 0;0 cos(phi) sin(phi);0 -sin(phi) cos(phi)];% to be complete by students
+    R_pitch = [cos(theta) 0 -sin(theta); 0 1 0; sin(theta) 0 cos(theta)];% to be complete by students
+    R_yaw = [cos(psi) sin(psi) 0; -sin(psi) cos(psi) 0;0 0 1];% to be complete by students
     R_b_v = R_roll*R_pitch*R_yaw;
     % rotate vertices
-    XYZ = R_b_v*XYZ;
+    XYZ = R_b_v'*XYZ;
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -97,10 +97,10 @@ function [V,F,colors] = defineSpacecraftBody()
     
     % Define the vertices (physical location of vertices)
     V = [fuse_l1 0 0; 
-        fuse_l2 fuse_w/2 fuse_h/2; 
-        fuse_l2 -fuse_w/2 fuse_h/2; 
-        fuse_l1 -fuse_w/2 -fuse_h/2;
-        fuse_l1 fuse_w/2 -fuse_h/2;
+        fuse_l2 fuse_w/2 -fuse_h/2; 
+        fuse_l2 -fuse_w/2 -fuse_h/2; 
+        fuse_l1 -fuse_w/2 fuse_h/2;
+        fuse_l1 fuse_w/2 fuse_h/2;
         -fuse_l3 0 0;
         0 wing_w/2 0;
         -wing_l wing_w/2 0;
@@ -111,7 +111,7 @@ function [V,F,colors] = defineSpacecraftBody()
         -fuse_l3 -tailwing_w/2 0;
         -fuse_l3+tailwing_l -tailwing_w/2 0;
         -fuse_l3+tailwing_l 0 0;
-        -fuse_l3 0 tail_h]; % 16 vertices totally
+        -fuse_l3 0 -tail_h]; % 16 vertices totally
     % Define surfaces as a list of numbered vertices
     F = [1 1 2 3; 1 1 2 5; 1 1 5 4; 1 1 3 4; 2 2 3 6; 3 3 4 6; 5 5 4 6; 2 2 5 6; 7 8 9 10; 11 12 13 14; 15 15 6 16];
     
