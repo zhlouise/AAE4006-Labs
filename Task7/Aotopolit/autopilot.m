@@ -159,8 +159,8 @@ function phi_c = course_hold(chi_c, chi, flag, P)
     if flag == 1
         integratorchi = 0;
     end
-%     error = wrapToPi(chi_c - chi);
-    error = chi_c - chi;
+    error = wrapToPi(chi_c - chi);
+    % error = chi_c - chi;
     integratorchi = integratorchi+P.Ts*error;
     phi_c = sat(P.kp_chi*error+P.ki_chi*integratorchi,P.phi_max,-P.phi_max);
 end
